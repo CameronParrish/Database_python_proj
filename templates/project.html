@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+  ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+  }
+
+  li {
+      float: left;
+  }
+
+  li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+  }
+
+  li a:hover:not(.active) {
+      background-color: #111;
+      color:white;
+  }
+
+  .active {
+      background-color: #B3B6B7;
+
+  }
+  </style>
+  </head>
+  <body>
+
+  <ul>
+    <li><a class="active" href="/project">Project</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/project">Project</a></li>
+  </ul>
+
+  </body>
+
+  <head>
+    <title>Flask Intro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+
+
+      <h1>Welcome to Flask!</h2>
+      <br>
+      <p>This project will allow you to speak into your computer and query a database. It will return the results and eventually speak them back to you. Pretty cool huh?</p>
+      <!-- <form action="/recordspeech" method="post">
+        <button type="submit" value="Query!" />
+      </form> -->
+
+    </div>
+
+    <div class="container">
+    <!-- CSS Styles -->
+    <style>
+      .speech {border: 1px solid #DDD; width: 300px; padding: 0; margin: 0}
+      .speech input {border: 0; width: 240px; display: inline-block; height: 30px;}
+      .speech img {float: right; width: 40px }
+    </style>
+
+    <!-- Search Form -->
+    <form id="labnol" method="GET">
+      <div class="speech">
+        <input type="text" name="q" id="transcript" placeholder="Query" value ="" />
+        <img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" />
+      </div>
+    </form>
+
+    <!-- HTML5 Speech Recognition API -->
+    <script>
+      function startDictation() {
+
+        if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+          var recognition = new webkitSpeechRecognition();
+
+          recognition.continuous = false;
+          recognition.interimResults = false;
+
+          recognition.lang = "en-US";
+          recognition.start();
+
+          recognition.onresult = function(e) {
+            document.getElementById('transcript').value
+                                     = e.results[0][0].transcript;
+            recognition.stop();
+            // document.getElementById('labnol').submit();
+          };
+
+          recognition.onerror = function(e) {
+            recognition.stop();
+          }
+
+        }
+      }
+    </script>
+  </div>
+
+  </body>
+</html>
